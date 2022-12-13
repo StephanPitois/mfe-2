@@ -1,15 +1,1 @@
-import App from './App.svelte';
-
-var target = document.body;
-if (typeof GLOBAL_MFE_PARENT_ID_MFE_2 !== 'undefined') {
-	target = document.getElementById(GLOBAL_MFE_PARENT_ID_MFE_2);
-}
-
-const app = new App({
-	target: target,
-	props: {
-		name: 'world'
-	}
-});
-
-export default app;
+export { default as Catbus } from './Catbus.svelte';
