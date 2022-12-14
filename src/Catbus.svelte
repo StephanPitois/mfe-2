@@ -53,7 +53,11 @@
 				event, which is triggered by my MFE neighbor Totoro's first child
 				component Satsuki. So far, Totoro's first child Satsuki triggered
 				{totoroClicks}
-				event(s).
+				event(s). NOTE: my memory is not very good and unlike the app shell,
+				I don't remember previous events when you navigate back and forth
+				between Page 1 and Page 2. When you come back from Page 2, you
+				will see that my event count is back to zero. I could save that
+				state in my store but it's not very important for this demo.
 				<br /><br />
 				{#if totoroEvents.length}
 					{#each totoroEvents as totoroEvent}
