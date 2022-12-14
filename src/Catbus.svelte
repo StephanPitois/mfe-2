@@ -5,11 +5,20 @@
 	import { onMount, onDestroy } from "svelte";
 
 	let totoroClicks = 0;
+	let totoroEvents = [];
 
 	// Use this to listen to events triggered by other micro-frontends:
 	const listener = ({ detail }) => {
 		console.log(detail.message);
 		totoroClicks++;
+		console.log("Catbus heard TOTORO_WAS_CLICKED.");
+		totoroEvents = [
+			...totoroEvents,
+			{
+				ts: new Date(),
+				message: "TOTORO_WAS_CLICKED",
+			},
+		];
 	};
 
 	onMount(async () => {
@@ -21,33 +30,63 @@
 	});
 </script>
 
-<main part="mfeMain">
-	<h1 part="mfeMainH1">MFE 2: Catbus (ネコバス, Nekobasu)</h1>
-	<img
-		part="mfeMainImg"
-		src="/img/catbus.jpeg"
-		alt="Catbus is a large character who is both a cat, and a bus."
-	/>
-	<p>
-		I am Catbus. I listen to the <code>TOTORO_WAS_CLICKED</code> event,
-		which is triggered by my MFE neighbor Totoro's first child component. So
-		far, Totoro's first child was clicked {totoroClicks} time(s).
-	</p>
-	<p>
-		Stores can be used with MFEs to keep the app state of each MFE, but they
-		cannot be used to share a global state across MFEs. I you click on the
-		first MFE, this count here will still show zero because the Count on the
-		first MFE cannot affect the Count on the second MFE.
-	</p>
-	<p>
-		This is good for isolation. This also means that stores cannot be used
-		for MFE communication - we use events instead.
-	</p>
-	<p>Clicks: {$count}.</p>
-</main>
+<div part="mfeCard">
+	<div part="mfeCardTitle">Micro-Frontend</div>
+	<div part="mfeCardBody">
+		<main part="mfeMain">
+			<h1 part="mfeMainH1">MFE 2: Catbus (ネコバス, Nekobasu)</h1>
+			<div class="flex">
+				<img
+					part="mfeMainImg"
+					src="/img/catbus.jpeg"
+					alt="Catbus is a large character who is both a cat, and a bus."
+				/>
+				<div part="mfeCard">
+					<div part="mfeCardTitle">Stores owned by Catbus</div>
+					<div part="mfeCardBody" class="mfeCardBody">
+						<code>$count = {$count}</code>
+					</div>
+				</div>
+			</div>
+			<p>
+				I am Catbus. I listen to the <code>TOTORO_WAS_CLICKED</code>
+				event, which is triggered by my MFE neighbor Totoro's first child
+				component Satsuki. So far, Totoro's first child Satsuki triggered
+				{totoroClicks}
+				event(s).
+				<br /><br />
+				{#if totoroEvents.length}
+					{#each totoroEvents as totoroEvent}
+						<code>
+							{new Date(totoroEvent.ts).toLocaleTimeString()}: {totoroEvent.message}
+						</code>
+						<br />
+					{/each}
+				{:else}
+					<i>Waiting for TOTORO_WAS_CLICKED...</i>
+				{/if}
+			</p>
+			<p>
+				The current value of Catbus's store $count is {$count}. No code
+				is written to change that value. This store is different from
+				the shell store of the same name, and from Totoro's store of the
+				same name.
+			</p>
+		</main>
+	</div>
+</div>
 
 <style>
 	p {
 		font-size: small;
+	}
+	.flex {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		margin-bottom: 25px;
+	}
+	.mfeCardBody {
+		padding: 10px;
 	}
 </style>
