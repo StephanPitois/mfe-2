@@ -2,7 +2,7 @@
 
 <script>
 	import { count } from "./lib/stores.js";
-	import { onMount, onDestroy } from "svelte";
+	import { registerEventListeners } from "./lib/EventListeners";
 
 	let totoroClicks = 0;
 	let totoroEvents = [];
@@ -21,13 +21,12 @@
 		];
 	};
 
-	onMount(async () => {
-		window.addEventListener("TOTORO_WAS_CLICKED", listener);
-	});
-
-	onDestroy(async () => {
-		window.removeEventListener("TOTORO_WAS_CLICKED", listener);
-	});
+	registerEventListeners("MFE-2: Catbus", [
+		{
+			eventType: "TOTORO_WAS_CLICKED",
+			listener,
+		},
+	]);
 </script>
 
 <div part="mfeCard">
@@ -55,9 +54,9 @@
 				{totoroClicks}
 				event(s). NOTE: my memory is not very good and unlike the app shell,
 				I don't remember previous events when you navigate back and forth
-				between Page 1 and Page 2. When you come back from Page 2, you
-				will see that my event count is back to zero. I could save that
-				state in my store but it's not very important for this demo.
+				between Page 1 and Page 2. When you come back from Page 2, you will
+				see that my event count is back to zero. I could save that state
+				in my store but it's not very important for this demo.
 				<br /><br />
 				{#if totoroEvents.length}
 					{#each totoroEvents as totoroEvent}
