@@ -2,10 +2,9 @@
 </script>
 
 <div class="mfeCard wrapper">
-	<div class="mfeCardTitle">Micro-Frontend</div>
 	<div class="mfeCardBody">
 		<main class="mfeMain">
-			<h1 class="mfeMainH1">MFE 2: Catbus (ネコバス, Nekobasu)</h1>
+			<h1 class="mfeMainH1">MFE 2: Catbus</h1>
 			<div class="flex">
 				<img
 					class="mfeMainImg"
