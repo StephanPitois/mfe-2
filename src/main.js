@@ -1,1 +1,1 @@
-export { default as Catbus } from './Catbus.svelte';
+export { default as MFE2 } from './MFE2.svelte';

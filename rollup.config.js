@@ -36,7 +36,7 @@ export default {
 		// sourcemap: production ? false : 'inline',
 		sourcemap: true,
 		format: 'iife',
-		name: 'mf2App',
+		name: 'remote_app_2',
 		file: 'public/build/bundle.js',
 		inlineDynamicImports: true, // Fix for "UMD and IIFE output formats are not supported for code-splitting builds"
 	},
