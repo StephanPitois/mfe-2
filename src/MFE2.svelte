@@ -10,5 +10,8 @@
 </main>
 
 <style>
-    /* Will an empty style section prevent getting a 404 when fetching bundle.css? */
+    /* Will a dummy style section prevent getting a 404 when fetching bundle.css? */
+    main {
+        display: block; /* force creation of bundle.css */
+    }
 </style>
