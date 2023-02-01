@@ -10,7 +10,6 @@
 </main>
 
 <style>
-    /* Will a dummy style section prevent getting a 404 when fetching bundle.css? */
     main {
         display: block; /* force creation of bundle.css */
     }
